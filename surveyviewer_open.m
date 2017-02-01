@@ -2,10 +2,6 @@ function surveyviewer_open(hf,evnt) %#ok
 
 gd=guidata(hf);
 
-if isfield(gd,'data');
-    gd=rmfield(gd,'data'); 
-    gd=rmfield(gd,'lnw');
-end
 
 
 [files, pathname] = uigetfile( ...
@@ -22,6 +18,25 @@ if ischar(files), files={files}; end
 set(gd.str,'visible','on','string','Reading Data Files. Please Wait.',...
     'foregroundcolor','r');
 drawnow
+
+
+
+gd.ldata=[];
+gd.bindata=[];
+if isfield(gd,'data');
+    gd=rmfield(gd,'data'); 
+    gd=rmfield(gd,'lnw');
+    if isfield(gd,'mh')
+        gd=rmfield(gd,'mh');
+    end
+    if isfield(gd,'th')
+        gd=rmfield(gd,'th');
+    end
+    cla(gd.axes1);
+    cla(gd.axes2);
+    cla(gd.axes3(1));
+    cla(gd.axes3(2));
+end
 
 %load files
 gd.data=arrayfun(@(x)(x.data),...
@@ -55,7 +70,8 @@ gd.lnw(length(lines))=struct('name',[],...
 [gd.lnw(:).y]=deal(ly{:});
 
 
-
+gd.ldata=extract_lines(gd.data,...
+        gd.lnw(1).name);
 
 
 arrayfun(@(x)(plot(x.x./1000,x.y./1000,'k-',...

@@ -49,7 +49,8 @@ uicontrol(hf2,'style','pushbutton','units','normalized',...
     'callback',@go_analysis_gui);
 uicontrol(hf2,'style','pushbutton','units','normalized',...
     'position',[0.392 0.037 0.241 0.118],'string','Cancel',...
-    'backgroundcolor',[0.94 0.94 0.94]);
+    'backgroundcolor',[0.94 0.94 0.94],...
+    'callback',@cancel_analysis_gui);
 
 
 gd2.anaopt=anaopt;
@@ -70,3 +71,7 @@ gd2.anaopt.ana_vc_unc=str2double(get(gd2.vu_edit,'string'));
 gd2.anaopt.ana_shore_ref=str2double(get(gd2.shore_edit,'string'));
 guidata(hf2,gd2)
 uiresume;
+
+%------------------------------------------------
+function cancel_analysis_gui(hf2,evnt) %#ok
+uiresume

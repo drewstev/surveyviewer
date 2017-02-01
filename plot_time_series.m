@@ -18,12 +18,12 @@ if ~isempty(gd.pstats)
         'linewi',2)
     plot(dt,gd.pstats.vol_change,'ko-','markerfacecolor','k',...
         'parent',gd.axes3(1),'linewi',2)
+    ylabel(gd.axes3(1),'\bf\itVolume Change (m^3/m)','fontsize',12)
     
     plot(dt,gd.pstats.shore_change,'ko-','markerfacecolor','k',...
         'linewi',2,'parent',gd.axes3(2))
-    
-%     set(gd.axes3,'xlim',[minx maxx],...
-%         'xtick',xt)
+    ylabel(gd.axes3(2),'\bf\itShoreline Change (m)','fontsize',12)
+    drawnow
 
 end
 
